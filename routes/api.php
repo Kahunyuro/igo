@@ -12,6 +12,8 @@ use App\Http\Controllers\DrugController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ForgotPasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,15 +25,20 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Route::middleware('auth:sanctum')->group( function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     //return $request->user();
 });
 
 
-Route::post('/register',[AuthController::class, 'register']);
-Route::post('/login',[AuthController::class, 'login']);
-Route::post('/password/reset', [AuthController::class,'password/reset']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/drug/search', [DrugController::class, 'search']);
+
+
+
+Route::post('/sendResetLinkEmail', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
 
 
 
@@ -42,11 +49,12 @@ Route::put('/orders/{id}', [OrdersController::class, 'update']);
 Route::delete('/orders/{id}', [OrdersController::class, 'destroy']);
 
 
-Route::post('/drugs', [DrugController::class, 'create']);
-Route::get('/drugs', [DrugController::class, 'readAlldrug']);
-Route::get('/drugs/{id}', [DrugController::class, 'readdrug']);
-Route::post('/drugs/{id}', [DrugController::class, 'update']);
-Route::delete('/drugs/{id}', [DrugController::class, 'delete']);
+Route::post('/drug', [DrugController::class, 'create']);
+Route::get('/drug', [DrugController::class, 'readAlldrug']);
+Route::get('/drug/{id}', [DrugController::class, 'readdrug']);
+Route::post('/drug/{id}', [DrugController::class, 'update']);
+Route::delete('/drug/{id}', [DrugController::class, 'delete']);
+
 
 
 
@@ -74,4 +82,4 @@ Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
 
 Route::post('/successful-payment', [PaymentController::class, 'handleSuccessfulPayment']);
 
-Route::get('/search', [SearchController::class,'index']);
+

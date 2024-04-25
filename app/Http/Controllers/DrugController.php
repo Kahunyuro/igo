@@ -122,4 +122,12 @@ class DrugController extends Controller
             ], 400);
         }
     }
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $drug = drug::where('name', 'LIKE', "%{$search}%")
+            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->get();
+        return response()->json($drug);
+    }
 }
