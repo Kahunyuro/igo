@@ -37,7 +37,15 @@ Route::get('/drug/search', [DrugController::class, 'search']);
 
 
 
-Route::post('/sendResetLinkEmail', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
+
+Route::post('/drug', [DrugController::class, 'create']);
+Route::get('/drug', [DrugController::class, 'readAlldrug']);
+Route::get('/drug/{id}', [DrugController::class, 'readdrug']);
+Route::post('/drug/{id}', [DrugController::class, 'update']);
+Route::delete('/drug/{id}', [DrugController::class, 'delete']);
+
+
 
 
 
@@ -48,12 +56,6 @@ Route::get('/orders/{id}', [OrdersController::class, 'show']);
 Route::put('/orders/{id}', [OrdersController::class, 'update']);
 Route::delete('/orders/{id}', [OrdersController::class, 'destroy']);
 
-
-Route::post('/drug', [DrugController::class, 'create']);
-Route::get('/drug', [DrugController::class, 'readAlldrug']);
-Route::get('/drug/{id}', [DrugController::class, 'readdrug']);
-Route::post('/drug/{id}', [DrugController::class, 'update']);
-Route::delete('/drug/{id}', [DrugController::class, 'delete']);
 
 
 

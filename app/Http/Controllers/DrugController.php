@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class DrugController extends Controller
 {
+    public function index()
+    {
+        $drug = Drug::all();
+
+        return response()->json($drug);
+    }
     public function create(Request $request)
     {
         $request->validate([
@@ -19,7 +25,7 @@ class DrugController extends Controller
         ]);
 
         if ($request->hasFile("image_path")) {
-            $filename = $request->file("image_path")->store("turfs", "public");
+            $filename = $request->file("image_path")->store("drug", "public");
         } else {
             $filename = null;
         }
@@ -41,7 +47,7 @@ class DrugController extends Controller
     {
         $drug = drug::all();
         if (!$drug) {
-            return response()->json("No Turf Was found");
+            return response()->json("No Drug Was found");
         } else {
             return response()->json($drug);
         }
@@ -55,11 +61,11 @@ class DrugController extends Controller
             if ($drug) {
                 return response()->json($drug);
             } else {
-                return response()->json("No Turf Was Found With The ID: ", $id);
+                return response()->json("No Drug Was Found With The ID: ", $id);
             }
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Turf Does Not Exist With Such An ID'
+                'error' => 'Drug Does Not Exist With Such An ID'
             ], 400);
         }
     }
@@ -78,14 +84,14 @@ class DrugController extends Controller
             ]);
 
             if ($request->hasFile("image_path")) {
-                $filename = $request->file("image_path")->store("turfs", "public");
+                $filename = $request->file("image_path")->store("drug", "public");
             } else {
                 $filename = null;
             }
             $drug = drug::findOrFail($id);
 
             if ($drug) {
-                $drug->name = $request->turf_name;
+                $drug->name = $request->name;
                 $drug->image_path = $filename;
 
                 $drug->description = $request->description;
@@ -96,7 +102,7 @@ class DrugController extends Controller
 
                 return response()->json($drug);
             } else {
-                return response()->json("No Turf Was Found With The ID: ", $id);
+                return response()->json("No Drug Was Found With The ID: ", $id);
             }
         } catch (\Exception $e) {
             return response()->json([

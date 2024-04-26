@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('drugs_id');
             $table->foreign('drugs_id')->references('id')->on('drugs')->onDelete('cascade');
             $table->integer('quantity');
-            $table->double('price');
+            $table->string('price');
             $table->timestamps();
         });
     }

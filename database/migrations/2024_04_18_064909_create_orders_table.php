@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->double('total_amount',);
+            $table->string('total_amount',);
             $table->string('status')->default('pending');
             $table->string('shipping_address');
             $table->timestamps();
