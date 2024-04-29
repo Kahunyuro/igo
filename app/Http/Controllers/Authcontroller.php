@@ -59,12 +59,26 @@ class AuthController extends Controller
 
         return response($response, 201);
     }
-       public function logout(Request $request)
+    public function logout(Request $request)
     {
         if ($request->user()) {
             $request->user()->tokens()->delete();
             return response([
                 'message' => 'logged out successfully',
+            ], 200);
+        } else {
+            return response([
+                'message' => 'Unauthenticated',
+            ], 401);
+        }
+    }
+    public function showUser(Request $request)
+    {
+        if ($request->user()) {
+            $user = $request->user();
+            return response([
+                'username' => $user->username,
+                'email' => $user->email,
             ], 200);
         } else {
             return response([

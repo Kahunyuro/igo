@@ -27,6 +27,7 @@ use App\Http\Controllers\ForgotPasswordController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/user', [AuthController::class,'']);
     //return $request->user();
 });
 
